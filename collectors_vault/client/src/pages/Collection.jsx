@@ -1,0 +1,70 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NeonButton from "../components/NeonButton";
+
+export default function Collection() {
+    // State to hold the list of games in the collection
+  const [games, setGames] = useState([]);
+  const navigate = useNavigate();
+
+  // function to load games
+  async function loadGames() {
+    const res = await fetch("/api/games");
+    const data = await res.json();
+    // Filter to only include games in the "Collection" list
+    setGames(data.filter((g) => g.listType === "Collection"));
+  }
+
+  // function to handle deletion of a game based on selected ID
+  async function handleDelete(id) {
+    await fetch(`/api/games/${id}`, { method: "DELETE" });
+    loadGames();
+  }
+
+  // Load games when the component mounts
+  useEffect(() => {
+    loadGames();
+  }, []);
+
+  return (
+    <div className="cardPage wide">
+      <h2 className="pageHeader">My Collection</h2>
+
+      <table className="neonTable">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Console</th>
+            <th>Condition</th>
+            <th>Notes</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {games.map((g) => (
+            <tr key={g._id}>
+              <td>{g.title}</td>
+              <td>{g.console}</td>
+              <td>{g.condition}</td>
+              <td>{g.notes}</td>
+              <td>
+                <button className="miniBtn" onClick={() => navigate(`/edit/${g._id}`)}>
+                  Edit
+                </button>
+                <button className="miniBtn danger" onClick={() => handleDelete(g._id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="bottomBtns">
+        <NeonButton text="Add more to my collection" onClick={() => navigate("/add")} />
+        <NeonButton text="Home" onClick={() => navigate("/")} />
+      </div>
+    </div>
+  );
+}

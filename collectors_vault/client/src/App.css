@@ -1,0 +1,303 @@
+/* ===========================
+   GLOBAL PAGE STYLING
+   =========================== */
+
+/* Sets the background for the entire page */
+body {
+  margin: 0; 
+  font-family: Arial, sans-serif; 
+  background: radial-gradient(circle at top, #0b0c2a 0%, #050514 60%, #020208 100%); /* Creates a retro glowing purple-blue gradient */
+  color: #e8e8ff; 
+  overflow-x: hidden; /* Prevents sideways scrolling */
+}
+
+/* =============================================
+   BACKGROUND GRID EFFECT (Retro neon grid floor)
+   ============================================= */
+.pageRoot {
+  min-height: 100vh; 
+  padding: 40px 20px; 
+
+  /* Creates horizontal and vertical glowing grid lines */
+  background-image:
+    linear-gradient(transparent 95%, rgba(140, 0, 255, 0.35) 96%), /* Horizontal lines */
+    linear-gradient(90deg, transparent 95%, rgba(140, 0, 255, 0.35) 96%); /* Vertical lines */
+
+  background-size: 60px 60px; /* Size of each grid square */
+  background-position: center bottom; /* Positions the grid */
+}
+
+/* ===========================
+   HOME PAGE LAYOUT
+   =========================== */
+
+/* Centers all content on the homepage */
+.homeWrap {
+  max-width: 900px; 
+  margin: 0 auto; 
+  text-align: center; 
+  padding-top: 40px; 
+}
+
+/* Large glowing main title text */
+.titleBig {
+  font-size: 64px; 
+  letter-spacing: 3px; 
+  color: #7ee6ff; 
+  
+  /* Multiple colored glows around the text */
+  text-shadow:
+    0 0 6px #6b00ff,
+    0 0 18px #ff3bd4,
+    0 0 40px #6b00ff;
+}
+
+.subtitle {
+  margin-top: 10px; 
+  font-size: 20px; 
+  color: #a8f6ff; /* Slightly lighter neon blue */
+  text-shadow: 0 0 10px #00ffff; 
+}
+
+/* Holds the Start, Collection, and Wishlist buttons */
+.btnColumn {
+  display: flex; 
+  flex-direction: column;
+  gap: 18px; /* Space between buttons */
+  margin-top: 40px; 
+  align-items: center; 
+}
+
+/* ===========================
+   NEON BUTTON STYLING
+   =========================== */
+
+/* Main glowing retro buttons */
+.neonBtn {
+  width: 320px; 
+  padding: 18px 20px; 
+  font-size: 22px; 
+  border-radius: 14px; 
+  border: 2px solid #7ee6ff; 
+  background: rgba(5, 10, 30, 0.9); 
+  color: #7ee6ff; 
+  cursor: pointer; /* Shows pointer icon when hovered */
+  text-transform: uppercase; /* Makes button text capitalized */
+
+  /* Multiple glowing effects */
+  text-shadow: 0 0 8px #00ffff;
+  box-shadow:
+    0 0 8px #00ffff,
+    0 0 20px #6b00ff inset,
+    0 0 30px #ff3bd4;
+
+  transition: 0.2s ease; /* Smooth animation effect */
+}
+
+/* Slight hover enlargement + more glow */
+.neonBtn:hover {
+  transform: scale(1.03); /* Slightly grows button */
+  box-shadow:
+    0 0 12px #00ffff,
+    0 0 30px #6b00ff inset,
+    0 0 45px #ff3bd4;
+}
+
+/* ===============================================================
+   CARD CONTAINER FOR PAGES (AddGame, Wishlist, Collection, Edit)
+   =============================================================== */
+.cardPage {
+  max-width: 650px; 
+  margin: 0 auto; 
+  padding: 24px; 
+  background: rgba(7, 10, 35, 0.95); /* Dark neon card color */
+  border: 2px solid #6b00ff; 
+  border-radius: 18px; 
+  
+  /* Outer glowing effect */
+  box-shadow:
+    0 0 14px #6b00ff,
+    0 0 26px #ff3bd4;
+}
+
+/* Makes card wider for table pages */
+.cardPage.wide {
+  max-width: 950px;
+}
+
+/* ===========================
+   PAGE TITLES INSIDE CARDS
+   =========================== */
+.pageHeader {
+  text-align: center;
+  font-size: 32px; 
+  color: #7ee6ff; 
+  text-shadow: 0 0 10px #00ffff; 
+  margin-bottom: 18px; 
+}
+
+/* ===================================
+   FORM STYLING (AddGame + EditGame)
+   =================================== */
+.formNeon {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* Space between fields */
+}
+
+.formNeon label {
+  font-size: 14px;
+  color: #e1d9ff; /* Soft light purple */
+}
+
+/* All inputs, dropdowns, and textarea */
+.formNeon input,
+.formNeon textarea,
+.formNeon select {
+  width: 100%; 
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 8px; 
+  border: 1px solid #7ee6ff; 
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  color: white;
+  box-shadow: 0 0 6px #00ffff inset; /* Inner glow */
+}
+
+textarea {
+  min-height: 90px;
+}
+
+/* ===========================================
+   NEON TABLE STYLING (Collection + Wishlist)
+   =========================================== */
+.neonTable {
+  width: 100%; 
+  border-collapse: collapse; /* Removes space between borders */
+  margin-top: 10px;
+}
+
+/* Table text cells and header cells */
+.neonTable th,
+.neonTable td {
+  border: 1px solid rgba(126, 230, 255, 0.35); /* Light glowing border */
+  padding: 10px; 
+  text-align: left;
+}
+
+/* Table heading row */
+.neonTable th {
+  color: #7ee6ff; 
+  background: rgba(10, 15, 45, 0.8); /* Dark neon background */
+  text-shadow: 0 0 6px #00ffff; 
+}
+
+/* ===================================================
+   MINI BUTTONS USED IN TABLE ACTIONS (Edit / Delete)
+   =================================================== */
+.miniBtn {
+  padding: 6px 10px;
+  margin-right: 6px;
+  border-radius: 6px;
+  border: 1px solid #7ee6ff; 
+  background: transparent; /* Clear background */
+  color: #7ee6ff; 
+  cursor: pointer;
+  text-shadow: 0 0 8px #00ffff; 
+  transition: 0.2s ease; /* Smooth hover */
+}
+
+/* Hover animation for small buttons */
+.miniBtn:hover {
+  transform: scale(1.07); /* Slight enlargement */
+}
+
+/* Delete button (danger color) */
+.miniBtn.danger {
+  border-color: #ff3bd4; 
+  color: #ff3bd4; 
+  text-shadow: 0 0 8px #ff3bd4; 
+}
+
+/* ========================================
+   BUTTONS BELOW COLLECTION/WISHLIST TABLE
+   ======================================== */
+.bottomBtns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+/* ==============================
+   DECORATIVE BOXES ON HOME PAGE
+   ============================== */
+.homeArtRow {
+  margin-top: 50px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  opacity: 0.4; /* Faded look */
+}
+
+/* Simple glowing squares */
+.pixelBox, 
+.consoleBox, 
+.controllerBox {
+  width: 120px;
+  height: 80px;
+  border: 2px solid #6b00ff;
+  box-shadow: 0 0 10px #6b00ff inset;
+  border-radius: 10px; 
+}
+
+/* ===========================
+   HOMEPAGE BACKGROUND IMAGE
+   =========================== */
+
+/* Outer wrapper for the homepage only */
+.homeBg {
+  position: relative; /* Allows layers (grid + photo) */
+
+  /* Sets photo as the background */
+  background-image: url("./assets/home-bg.png");
+
+  background-size: cover; /* Fill entire screen */
+  background-position: center; /* Center image */
+  background-repeat: no-repeat;
+
+  min-height: 100vh; /* Covers full height of page */
+}
+
+/* Add a grid overlay ABOVE the background image */
+.homeBg::before {
+  content: "";
+
+  /* Make overlay fill page */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* SAME GRID as pageRoot, but as overlay */
+  background-image:
+    linear-gradient(transparent 95%, rgba(140, 0, 255, 0.35) 96%),
+    linear-gradient(90deg, transparent 95%, rgba(140, 0, 255, 0.35) 96%);
+
+  background-size: 60px 60px;
+
+  /* Slight transparency so the photo is still visible */
+  opacity: 0.4;
+
+  /* Makes sure the grid sits BEHIND the text */
+  z-index: 1;
+}
+
+/* Keep homepage content ABOVE the grid overlay */
+.homeWrap {
+  position: relative;
+  z-index: 2; /* Brings the homepage content on top */
+}
+
