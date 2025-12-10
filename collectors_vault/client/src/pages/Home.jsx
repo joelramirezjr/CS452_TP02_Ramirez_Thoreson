@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <div className="homeBg">  {/* this is the background image */}
       <div className="homeWrap">
-        <h1 className="titleBig">Collector’s Vault</h1>
+        <h1 className="titleBig">COLLECTOR'S VAULT</h1>
         <p className="subtitle">Manage your retro game collection</p>
 
         <div className="btnColumn">
-          <NeonButton text="Start" onClick={() => navigate("/add")} />
+          <NeonButton text="Start" onClick={() => navigate("/loading")} />
           <NeonButton text="My Collection" onClick={() => navigate("/collection")} />
           <NeonButton text="Wishlist" onClick={() => navigate("/wishlist")} />
         </div>

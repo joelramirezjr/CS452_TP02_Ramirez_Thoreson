@@ -41,7 +41,9 @@ body {
 
 /* Large glowing main title text */
 .titleBig {
-  font-size: 64px; 
+  font-family: "Courier New", Courier, monospace;
+  font-size: 70px; 
+  font-weight: bold;
   letter-spacing: 3px; 
   color: #7ee6ff; 
   
@@ -122,7 +124,7 @@ body {
 
 /* Makes card wider for table pages */
 .cardPage.wide {
-  max-width: 950px;
+  max-width: 1200px;
 }
 
 /* ===========================
@@ -270,7 +272,7 @@ textarea {
   min-height: 100vh; /* Covers full height of page */
 }
 
-/* Add a grid overlay ABOVE the background image */
+/* Added a grid overlay ABOVE the background image */
 .homeBg::before {
   content: "";
 
@@ -301,3 +303,29 @@ textarea {
   z-index: 2; /* Brings the homepage content on top */
 }
 
+/* This is for the loading screen ------------------------------- */
+.loadingWrap {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  justify-content: center;
+  align-items: center;
+  gap: 12px; /* space between GIF and text */
+}
+
+.loadingGif {
+  width: 500px; /* adjust size as you like */
+}
+
+.loadingText {
+  font-size: 22px;
+  color: #b8c8ff;
+  text-shadow: 0 0 8px #7ee6ff;
+}

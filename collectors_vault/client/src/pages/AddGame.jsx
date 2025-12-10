@@ -5,21 +5,30 @@ import NeonButton from "../components/NeonButton";
 export default function AddGame() {
   const navigate = useNavigate();
 
-  // Form state
   const [formData, setFormData] = useState({
     title: "",
     console: "",
     condition: "",
     listType: "Collection",
-    notes: ""
+    notes: "",
+    coverArt: ""
   });
 
-  // Handle form input changes
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  // Handle form submission using async/await/fetch
+  function handleFileChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData({ ...formData, coverArt: reader.result });
+    };
+    reader.readAsDataURL(file);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -31,11 +40,7 @@ export default function AddGame() {
       });
 
       const saved = await res.json();
-
-      // Navigate based on listType selected 
-      if (saved.listType === "Wishlist") navigate("/wishlist");
-      else navigate("/collection");
-      // catch error section to help with debugging
+      navigate(saved.listType === "Wishlist" ? "/wishlist" : "/collection");
     } catch (err) {
       alert("Error adding game");
     }
@@ -46,51 +51,57 @@ export default function AddGame() {
       <h2 className="pageHeader">Add a Game</h2>
 
       <form className="formNeon" onSubmit={handleSubmit}>
-        <label>
-          Title
+        
+        <label>Title
           <input name="title" value={formData.title} onChange={handleChange} />
         </label>
 
-        <label>
-          Console
+        <label>Console
           <input name="console" value={formData.console} onChange={handleChange} />
         </label>
 
-        <label>
-          Condition
-          <input name="condition" value={formData.condition} onChange={handleChange} />
+        {/* Updated to dropdown instead of text input */}
+        <label>Condition
+          <select
+            name="condition"
+            value={formData.condition}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Condition</option>
+            <option value="New/Sealed">New/Sealed</option>
+            <option value="Like New">Like New</option>
+            <option value="Excellent">Excellent</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+          </select>
         </label>
 
-        <label>
-          Add to
+        <label>Add to
           <select name="listType" value={formData.listType} onChange={handleChange}>
             <option value="Collection">My Collection</option>
             <option value="Wishlist">Wishlist</option>
           </select>
         </label>
 
-        <label>
-          Notes
+        <label>Cover Art
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+        </label>
+
+        <label>Notes
           <textarea name="notes" value={formData.notes} onChange={handleChange} />
         </label>
 
         <div className="bottomBtns">
-            <button className="neonBtn">Save Game</button>
-            <div>
-                <NeonButton text="My Collection" onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/collection")
-                    }} 
-                />
-                <NeonButton text="Wishlist" onClick={(e) => {
-                    e.preventDefault();
-                    navigate("/wishlist")
-                    }} 
-                />
-            </div>
+          <button className="neonBtn">Save Game</button>
+          <NeonButton text="My Collection" onClick={(e) => { e.preventDefault(); navigate("/collection")}} />
+          <NeonButton text="Wishlist" onClick={(e) => { e.preventDefault(); navigate("/wishlist")}} />
         </div>
-        
       </form>
     </div>
   );
 }
+
+
+

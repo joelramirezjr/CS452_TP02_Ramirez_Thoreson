@@ -3,24 +3,20 @@ import { useNavigate } from "react-router-dom";
 import NeonButton from "../components/NeonButton";
 
 export default function Wishlist() {
-    // List of games to keep track of
   const [games, setGames] = useState([]);
   const navigate = useNavigate();
 
   async function loadGames() {
     const res = await fetch("/api/games");
     const data = await res.json();
-    // Filter games to only include those in the wishlist
     setGames(data.filter((g) => g.listType === "Wishlist"));
   }
 
-  // Function to handle the delete action for a game based on its ID
   async function handleDelete(id) {
     await fetch(`/api/games/${id}`, { method: "DELETE" });
     loadGames();
   }
 
-  // Load games when the component mounts
   useEffect(() => {
     loadGames();
   }, []);
@@ -32,6 +28,7 @@ export default function Wishlist() {
       <table className="neonTable">
         <thead>
           <tr>
+            <th>Cover Art</th>
             <th>Title</th>
             <th>Console</th>
             <th>Condition</th>
@@ -43,6 +40,22 @@ export default function Wishlist() {
         <tbody>
           {games.map((g) => (
             <tr key={g._id}>
+              <td>
+                {g.coverArt ? (
+                  <img
+                    src={g.coverArt}
+                    alt={`${g.title} cover`}
+                    style={{
+                      width: "auto",
+                      height: "70px",
+                      objectFit: "cover",
+                      borderRadius: "6px"
+                    }}
+                  />
+                ) : (
+                  "None"
+                )}
+              </td>
               <td>{g.title}</td>
               <td>{g.console}</td>
               <td>{g.condition}</td>
@@ -67,3 +80,5 @@ export default function Wishlist() {
     </div>
   );
 }
+
+

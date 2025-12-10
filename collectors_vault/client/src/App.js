@@ -7,6 +7,8 @@ import AddGame from "./pages/AddGame";
 import Collection from "./pages/Collection";
 import Wishlist from "./pages/Wishlist";
 import EditGame from "./pages/EditGame";
+import LoadingScreen from "./pages/LoadingScreen";
+
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
           <Route path="collection" element={<Collection />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="edit/:id" element={<EditGame />} />
+          <Route path="/loading" element={<LoadingScreen />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

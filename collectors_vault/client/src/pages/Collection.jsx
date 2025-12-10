@@ -3,25 +3,20 @@ import { useNavigate } from "react-router-dom";
 import NeonButton from "../components/NeonButton";
 
 export default function Collection() {
-    // State to hold the list of games in the collection
   const [games, setGames] = useState([]);
   const navigate = useNavigate();
 
-  // function to load games
   async function loadGames() {
     const res = await fetch("/api/games");
     const data = await res.json();
-    // Filter to only include games in the "Collection" list
     setGames(data.filter((g) => g.listType === "Collection"));
   }
 
-  // function to handle deletion of a game based on selected ID
   async function handleDelete(id) {
     await fetch(`/api/games/${id}`, { method: "DELETE" });
     loadGames();
   }
 
-  // Load games when the component mounts
   useEffect(() => {
     loadGames();
   }, []);
@@ -33,6 +28,7 @@ export default function Collection() {
       <table className="neonTable">
         <thead>
           <tr>
+            <th>Cover Art</th>
             <th>Title</th>
             <th>Console</th>
             <th>Condition</th>
@@ -44,6 +40,22 @@ export default function Collection() {
         <tbody>
           {games.map((g) => (
             <tr key={g._id}>
+              <td>
+                {g.coverArt ? (
+                  <img
+                    src={g.coverArt}
+                    alt={`${g.title} cover`}
+                    style={{
+                      width: "auto",
+                      height: "70px",
+                      objectFit: "cover",
+                      borderRadius: "6px"
+                    }}
+                  />
+                ) : (
+                  "None"
+                )}
+              </td>
               <td>{g.title}</td>
               <td>{g.console}</td>
               <td>{g.condition}</td>
@@ -68,3 +80,5 @@ export default function Collection() {
     </div>
   );
 }
+
+
